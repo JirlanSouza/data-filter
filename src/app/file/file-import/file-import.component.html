@@ -1,0 +1,24 @@
+<div id="file-import-view">
+  <div id="file-drag-drop">
+    <h4>Import csv file!</h4>
+    <div
+      id="file-drop-zone"
+      [ngClass]="{ 'on-drag-file': isDraging }"
+      (dragover)="onDragOver($event)"
+      (dragend)="onFileDrop($event)"
+      (dragleave)="onFileDragLeaving($event)"
+      (drop)="onFileDrop($event)"
+    >
+      <mat-icon fontIcon="input" />
+    </div>
+    <button mat-flat-button color="primary" draggable="true">
+      <label for="file-input">Select file </label>
+    </button>
+    <input
+      id="file-input"
+      type="file"
+      accept="csv"
+      (change)="onFileInputChange($event)"
+    />
+  </div>
+</div>
