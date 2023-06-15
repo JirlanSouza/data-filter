@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Sheet } from 'xlsx';
 import { FileService } from '../file.service';
 
 @Component({
@@ -8,15 +9,13 @@ import { FileService } from '../file.service';
 })
 export class FileImportComponent {
   isDraging = false;
+  @Output() onSheetImported = new EventEmitter<Sheet>();
 
   constructor(private fileService: FileService) {}
 
   async onFileInputChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    const files = target.files;
-    if (files && files.length > 0) {
-      this.fileService.handleFileData(files.item(0) as File);
-    }
+    await this.handleFileEvent(target.files);
   }
 
   onFileDragLeaving(event: Event) {
@@ -31,14 +30,18 @@ export class FileImportComponent {
     this.isDraging = true;
   }
 
-  onFileDrop(event: DragEvent) {
+  async onFileDrop(event: DragEvent) {
     event.preventDefault();
     event.stopPropagation();
     this.isDraging = false;
-    const files = event.dataTransfer?.files;
+    await this.handleFileEvent(event.dataTransfer?.files);
+  }
 
+  async handleFileEvent(files?: FileList | null) {
     if (files && files.length > 0) {
-      this.fileService.handleFileData(files.item(0) as File);
+      const data = await this.fileService.handleFileData(files.item(0) as File);
+      this.onSheetImported.emit(data);
+      console.log('ok', files);
     }
   }
 }

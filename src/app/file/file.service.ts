@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Sheet, read } from 'xlsx';
 
 @Injectable({
   providedIn: 'root',
@@ -6,7 +7,9 @@ import { Injectable } from '@angular/core';
 export class FileService {
   constructor() {}
 
-  handleFileData(file: File) {
-    console.log(file.name);
+  async handleFileData(file: File): Promise<Sheet> {
+    const data = read(await file.arrayBuffer());
+    const sheet = data.Sheets[data.SheetNames[0]];
+    return sheet;
   }
 }
