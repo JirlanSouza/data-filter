@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Sheet, read } from 'xlsx';
+import { parse } from 'papaparse';
+import { Observable } from 'rxjs';
+import { DataRow } from '../shared/core/file-data.type';
 
 @Injectable({
   providedIn: 'root',
@@ -7,9 +9,17 @@ import { Sheet, read } from 'xlsx';
 export class FileService {
   constructor() {}
 
-  async handleFileData(file: File): Promise<Sheet> {
-    const data = read(await file.arrayBuffer());
-    const sheet = data.Sheets[data.SheetNames[0]];
-    return sheet;
+  handleFileData(file: File): Observable<DataRow[]> {
+    return new Observable<DataRow[]>((subscribe) => {
+      const data = parse<DataRow>(file, {
+        complete(results) {
+          subscribe.next(results.data);
+          subscribe.complete();
+        },
+        error(error: Error) {
+          subscribe.error(error);
+        },
+      });
+    });
   }
 }

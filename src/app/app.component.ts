@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Sheet } from 'xlsx';
+import { Observable } from 'rxjs';
+import { FileData } from './shared/core/file-data.type';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,9 @@ import { Sheet } from 'xlsx';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  sheetData: Sheet | null = null;
+  fileData?: Observable<FileData>;
 
-  setSheetData(data: Sheet) {
-    this.sheetData = data;
+  setFileData(data: Observable<FileData>) {
+    this.fileData = data;
   }
 }

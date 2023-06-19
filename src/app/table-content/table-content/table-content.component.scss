@@ -1,0 +1,70 @@
+.container {
+  height: 100%;
+  padding: 2rem 3rem 1rem;
+  user-select: none;
+
+  .table-wrapper {
+    height: 90%;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  table.mat-mdc-table {
+    display: block;
+    height: 100%;
+    table-layout: fixed;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow: auto;
+  }
+
+  th {
+    filter: brightness(0.85);
+  }
+
+  &.resizing {
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: col-resize;
+  }
+
+
+  th,
+  tr {
+    min-height: 2rem;
+    height: 2rem;
+  }
+
+  td.mat-mdc-cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 8rem;
+    width: fit-content;
+  }
+
+  th.mat-mdc-header-cell {
+    position: relative;
+    font-size: smaller;
+    font-weight: 600;
+
+    &:not(:last-child) {
+      .resize-holder {
+        cursor: col-resize;
+        width: 20px;
+        height: 100%;
+        position: absolute;
+        right: -10px;
+        top: 0;
+        z-index: 10000;
+      }
+    }
+  }
+
+  td.mat-mdc-cell,
+  th.mat-mdc-header-cell {
+    font-size: smaller;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+  }
+}

@@ -4,11 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FileModule } from './file/file.module';
 import { LayoutModule } from './layout/layout.module';
-import { TableComponent } from './tableContent/table/table.component';
+import { TableContentModule } from './table-content/table-content.module';
 
 @NgModule({
-  declarations: [AppComponent, TableComponent],
-  imports: [BrowserModule, LayoutModule, FileModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, LayoutModule, FileModule, TableContentModule],
   providers: [],
   bootstrap: [AppComponent],
 })

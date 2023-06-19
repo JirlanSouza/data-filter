@@ -1,3 +1,7 @@
 <app-template>
-  <app-file-import (onSheetImported)="setSheetData($event)"></app-file-import>
+  <app-file-import
+    *ngIf="!fileData"
+    (onFileImported)="setFileData($event)"
+  ></app-file-import>
+  <app-table-content *ngIf="fileData" [fileData]="fileData"></app-table-content>
 </app-template>

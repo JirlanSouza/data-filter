@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="tableData" class="mat-elevation-z8">
+      <ng-container
+        *ngFor="let columnName of tableHeaders; let columIndex = index"
+      >
+        <ng-container *ngIf="columIndex == 0" matColumnDef="select" sticky>
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event ? toggleAllRows() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+              [aria-label]="checkboxLabel()"
+            >
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)"
+              [aria-label]="checkboxLabel(row)"
+            >
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container *ngIf="columIndex > 0" matColumnDef="{{ columnName }}">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [resizeColumn]="true"
+            [index]="columIndex"
+          >
+            <span>{{ columnName }}</span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <span>{{ element[columIndex] }}</span>
+          </td>
+        </ng-container>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="tableHeaders; sticky: true"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: tableHeaders"
+        (click)="selection.toggle(row)"
+      ></tr>
+    </table>
+  </div>
+</div>

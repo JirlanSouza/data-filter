@@ -1,9 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$primary-palette: mat.define-palette(mat.$purple-palette, 800);
+$my-accent: mat.define-palette(mat.$green-palette, A200, A400, A700);
+
+$theme: mat.define-dark-theme((color: (primary: $primary-palette,
+        accent: $my-accent,
+      ),
+      typography: mat.define-typography-config(),
+      density: -3,
+    ));
+
+@include mat.all-component-themes($theme);
+
+::-webkit-scrollbar {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0.4rem;
+  background: mat.get-color-from-palette(mat.$dark-theme-foreground-palette, "divider");
+  //filter: brightness(0.45);
+}
+
+::-webkit-scrollbar-thumb {
+  background: mat.get-color-from-palette(mat.$dark-theme-foreground-palette, "divider");
+  border-radius: 10px;
+  transition: all 1s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: mat.get-color-from-palette($primary-palette);
+  filter: opacity(0.7);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent; // mat.get-color-from-palette(mat.$dark-theme-foreground-palette, "divider");
+}
 
 html,
 body {
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
 }
 
 body {

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Sheet } from 'xlsx';
+import { Observable } from 'rxjs';
+import { FileData } from 'src/app/shared/core/file-data.type';
 import { FileService } from '../file.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { FileService } from '../file.service';
 })
 export class FileImportComponent {
   isDraging = false;
-  @Output() onSheetImported = new EventEmitter<Sheet>();
+  @Output() onFileImported = new EventEmitter<Observable<FileData>>();
 
   constructor(private fileService: FileService) {}
 
@@ -40,8 +41,7 @@ export class FileImportComponent {
   async handleFileEvent(files?: FileList | null) {
     if (files && files.length > 0) {
       const data = await this.fileService.handleFileData(files.item(0) as File);
-      this.onSheetImported.emit(data);
-      console.log('ok', files);
+      this.onFileImported.emit(data);
     }
   }
 }
