@@ -22,13 +22,12 @@ $theme: mat.define-dark-theme((color: (primary: $primary-palette,
 
 ::-webkit-scrollbar-track {
   border-radius: 0.4rem;
-  background: mat.get-color-from-palette(mat.$dark-theme-foreground-palette, "divider");
-  //filter: brightness(0.45);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: mat.get-color-from-palette(mat.$dark-theme-foreground-palette, "divider");
-  border-radius: 10px;
+  border-radius: 0.4rem;
   transition: all 1s;
 }
 
@@ -38,7 +37,7 @@ $theme: mat.define-dark-theme((color: (primary: $primary-palette,
 }
 
 ::-webkit-scrollbar-corner {
-  background: transparent; // mat.get-color-from-palette(mat.$dark-theme-foreground-palette, "divider");
+  background: transparent;
 }
 
 html,
