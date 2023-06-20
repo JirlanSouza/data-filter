@@ -3,8 +3,18 @@
   padding: 2rem 3rem 1rem;
   user-select: none;
 
+  .table-data-controls-container {
+    display: flex;
+    justify-content: space-between;
+
+    .controls-buttons-box {
+      display: flex;
+      gap: 0.8rem;
+    }
+  }
+
   .table-wrapper {
-    height: 90%;
+    height: 85%;
     border-radius: 1rem;
     overflow: hidden;
   }

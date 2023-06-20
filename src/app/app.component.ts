@@ -13,4 +13,8 @@ export class AppComponent {
   setFileData(data: Observable<FileData>) {
     this.fileData = data;
   }
+
+  clearFileData() {
+    this.fileData = undefined;
+  }
 }

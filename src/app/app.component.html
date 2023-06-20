@@ -3,5 +3,9 @@
     *ngIf="!fileData"
     (onFileImported)="setFileData($event)"
   ></app-file-import>
-  <app-table-content *ngIf="fileData" [fileData]="fileData"></app-table-content>
+  <app-table-content
+    *ngIf="fileData"
+    [fileData]="fileData"
+    (dataFilterCancell)="clearFileData()"
+  ></app-table-content>
 </app-template>

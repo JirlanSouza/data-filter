@@ -1,4 +1,35 @@
 <div class="container">
+  <div class="table-data-controls-container">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Filtre os dados"
+        [(ngModel)]="tableDataFilter"
+        (keyup)="applyFilter()"
+      />
+      <button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear filter"
+        (click)="tableDataFilter = ''; applyFilter()"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="controls-buttons-box">
+      <button mat-flat-button (click)="dataFilterCancell.emit()">
+        Cancelar
+      </button>
+      <a mat-flat-button color="primary" download="Export.csv">
+        <mat-icon>publish</mat-icon>
+        Export
+      </a>
+    </div>
+  </div>
+
   <div class="table-wrapper">
     <table mat-table [dataSource]="tableData" class="mat-elevation-z8">
       <ng-container
